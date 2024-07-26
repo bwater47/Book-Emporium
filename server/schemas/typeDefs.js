@@ -1,6 +1,6 @@
 const typeDefs = `
   type Query {
-    me: [User]
+    me: User
   }
 
   type Mutation {
