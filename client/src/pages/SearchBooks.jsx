@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
+// Keep searchGoogleBooks for fetching data
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
