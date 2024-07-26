@@ -7,8 +7,10 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
-
-import { getMe, deleteBook } from '../utils/API';
+// the delete book becomes mutation
+import { useMutation } from '@apollo/client';
+import { REMOVE_BOOK } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
@@ -20,13 +22,14 @@ const SavedBooks = () => {
 
   useEffect(() => {
     const getUserData = async () => {
+      // with GET_ME
       try {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
           return false;
         }
-
+// Get me will change to the query that gets the user's saved books
         const response = await getMe(token);
 
         if (!response.ok) {
