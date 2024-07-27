@@ -8,11 +8,15 @@ export default defineConfig({
     port: 3000,
     open: true,
     proxy: {
-      // Proxy requests to /graphql to your GraphQL server
+      // Proxy requests to /graphql to your GraphQL server.
       "/graphql": {
-        target: "http://localhost:3001", // The address of your GraphQL server
+        // The GraphQL server is running on port 3001.
+        target: "http://localhost:3001",
+        // Don't forward the host header.
         changeOrigin: true,
+        // Don't verify SSL certificates.
         secure: false,
+        // Rewrite the path to remove /graphql.
         rewrite: (path) => path.replace(/^\/graphql/, "/graphql"),
       },
     },

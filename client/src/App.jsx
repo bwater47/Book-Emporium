@@ -1,5 +1,3 @@
-// Create an apollo provider to make every request work with the apollo server.
-// Create an apollo provider to make every request work with the apollo server.
 import "./App.css";
 import {
   ApolloClient,
@@ -11,16 +9,16 @@ import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
-// Construct our main GraphQL API endpoint
+// Construct our main GraphQL API endpoint.
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
 });
 
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header.
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
+  // Get the authentication token from local storage if it exists.
   const token = localStorage.getItem("id_token");
-  // return the headers to the context so httpLink can read them
+  // Return the headers to the context so httpLink can read them.
   return {
     headers: {
       ...headers,
@@ -29,10 +27,34 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// Define the custom cache with merge function.
+const cache = new InMemoryCache({
+  typePolicies: {
+    User: {
+      fields: {
+        savedBooks: {
+          merge(existing = [], incoming = []) {
+            const existingBooks = new Map(
+              existing.map((book) => [book.bookId, book])
+            );
+            const incomingBooks = new Map(
+              incoming.map((book) => [book.bookId, book])
+            );
+
+            // Combine the books, favoring incoming data in case of conflicts.
+            return [...existingBooks.values(), ...incomingBooks.values()];
+          },
+        },
+      },
+    },
+  },
+});
+
+// Create Apollo Client instance with the custom cache.
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API.
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache,
 });
 
 function App() {

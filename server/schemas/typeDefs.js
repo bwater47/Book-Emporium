@@ -1,3 +1,4 @@
+// Define the typeDefs using the gql tag for the Query, Mutation, User, Book, and Auth types.
 const typeDefs = `
   type Query {
     me: User
@@ -26,7 +27,7 @@ const typeDefs = `
   }
 
   type Book {
-    bookId: String
+    bookId: String!
     authors: [String]
     description: String
     title: String

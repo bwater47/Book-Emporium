@@ -65,10 +65,10 @@ The Book-Emporium is for managing and showcasing books, allowing employers to se
 
 - <strong>Book Emporium Screenshots</strong>
 
-- ![Screenshot]()
-- ![Screenshot]()
-- ![Screenshot]()
-- ![Screenshot]()
+- ![Screenshot](./client/src/assets/Search.png)
+- ![Screenshot](./client/src/assets/LoggedIn.png)
+- ![Screenshot](./client/src/assets/Saved.png)
+- ![Screenshot](./client/src/assets/Remove.png)
 
 ## Support
 
