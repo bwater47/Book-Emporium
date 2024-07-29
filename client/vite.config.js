@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import process from "process";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
       // Proxy requests to /graphql to your GraphQL server.
       "/graphql": {
         // The GraphQL server is running on port 3001.
-        target: "http://localhost:3001",
+        target: process.env.VITE_GRAPHQL_ENDPOINT || "http://localhost:3001",
         // Don't forward the host header.
         changeOrigin: true,
         // Don't verify SSL certificates.

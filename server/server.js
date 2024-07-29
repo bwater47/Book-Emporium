@@ -17,9 +17,9 @@ const server = new ApolloServer({
 
 // Set up CORS options.
 const corsOptions = {
-  origin: "http://localhost:3000", // Adjust as needed for your frontend's URL.
+  origin: "http://localhost:3000",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow cookies and credentials if needed.
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
